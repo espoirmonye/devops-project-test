@@ -22,19 +22,14 @@ pipeline {
             }
         }
         
-        stage('Push image') {
-        withDockerRegistry([ credentialsId: "docker-hub-credentials", url: "" ]) 
-        {
-        bat "docker push docker image push espoircmr/zencaisse:build"
-        }
-        }
+        
 
-        //stage('Push image') {
-            //steps {
-                //sh 'echo $dockercredentials_PSW | docker login -u $dockercredentials_USR --password-stdin '
-               // sh 'docker image tag zencaisse:$BUILD_NUMBER espoircmr/zencaisse:$BUILD_NUMBER'
-               // sh 'docker image push espoircmr/zencaisse:$BUILD_NUMBER'
-           // }
-       // }
+        stage('Push image') {
+            steps {
+               sh 'echo $dockercredentials_PSW | docker login -u $dockercredentials_USR --password-stdin '
+               sh 'docker image tag zencaisse:$BUILD_NUMBER espoircmr/zencaisse:$BUILD_NUMBER'
+               sh 'docker image push espoircmr/zencaisse:$BUILD_NUMBER'
+           }
+       }
     }
 }
