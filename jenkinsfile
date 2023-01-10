@@ -26,7 +26,7 @@ pipeline {
 
         stage('Push image') {
             steps {
-               sh 'echo $dockercredentials_PSW | docker login -u $dockercredentials_USR --password-stdin '
+               //sh 'echo $dockercredentials_PSW | docker login -u $dockercredentials_USR --password-stdin '
                sh 'docker image tag zencaisse:$BUILD_NUMBER espoircmr/zencaisse:$BUILD_NUMBER'
                sh 'docker image push espoircmr/zencaisse:$BUILD_NUMBER'
            }
